@@ -136,6 +136,7 @@ window.addEventListener("DOMContentLoaded", function () {
         imageLi.appendChild(newImg);
     }
 
+//generate records
 
     function automagicRecords () {
         for(var n in json) {
@@ -151,10 +152,8 @@ window.addEventListener("DOMContentLoaded", function () {
         editLink.addEventListener("click", editPrintRecords);
         editLink.innerHTML = editText;
         linksLi.appendChild(editLink);
-
         var breakTag = document.createElement("br");
         linksLi.appendChild(breakTag);
-
         var deleteLink       = document.createElement("a");
         deleteLink.href      = "#";
         deleteLink.key       = key;
@@ -169,42 +168,56 @@ window.addEventListener("DOMContentLoaded", function () {
         var value = localStorage.getItem(this.key);
         var item = JSON.parse(value);
 
-        switchControls("off"); // show the form
+        switchControls("off"); // show the for
+
+        var radios = document.forms[0].school;
+        for (i = 0; i < radios.length; i++){
+            if (radios[i].value == "Kaigetsudō" && item.school[1] == "Kaigetsudō") {
+                radios[i].setAttribute("checked", "checked");
+            }
+            if (radios[i].value == "Torii" && item.school[1] == "Torii") {
+                radios[i].setAttribute("checked", "checked");
+            }
+            if (radios[i].value == "Katsukawa" && item.school[1] == "Katsukawa") {
+                radios[i].setAttribute("checked", "checked");
+            }
+            if (radios[i].value == "Utagawa" && item.school[1] == "Utagawa") {
+                radios[i].setAttribute("checked", "checked");
+            }
+            if (radios[i].value == "Sōsaku" && item.school[1] == "Sōsaku") {
+                radios[i].setAttribute("checked", "checked");
+            }
+            if (radios[i].value == "Shin" && item.school[1] == "Shin") {
+                radios[i].setAttribute("checked", "checked");
+            }
+        }
+
+        var checkBoxValue = document.forms[0].recordComplete;
+        for (i = 0; i  < checkBoxValue.length; i++){
+            if (checkBoxValue[i].value == "Yes" && item.recordComplete[1] == "Yes") {
+            checkBoxValue[1].setAttribute("checked", "checked");
+            }
+        }
 
         main("groups").value   = item.group[1];
         main("printName").value = item.printName[1];
         main("approxDateOfPrint").value = item.approxDateOfPrint[1];
-        main("recordCompleteValue").value = item.recordComplete[1];
+        main("school").value    = item.group[1];
+        main("approxValue").value   = item.approxValue[1];
+        main("datePrint").value    = item.datePrint[1];//not working
+        main("dateAdded").value    = item.dateAdded[1];//not working
+        main("additionalComments").value    = item.additionalComments[1];
 
-        var radios = document.forms[0].school;
-        for (i = 0; i < radios.length; i++){
-            if (radios[i].value == "Kaigetsudō school, from 1700–14" && item.school[1] == "Kaigetsudō school, from 1700–14") {
-                radios[i].setAttribute("checked", "checked");
-            }
-            if (radios[i].value == "Torii school, from 1700" && item.school[1] == "Torii school, from 1700") {
-                radios[i].setAttribute("checked", "checked");
-            }
-            if (radios[i].value == "Katsukawa school, from about 1740" && item.school[1] == "Katsukawa school, from about 1740") {
-                radios[i].setAttribute("checked", "checked");
-            }
-            if (radios[i].value == "Utagawa school, from 1842" && item.school[1] == "Utagawa school, from 1842") {
-                radios[i].setAttribute("checked", "checked");
-            }
-            if (radios[i].value == "Sōsaku hanga movement, from 1904" && item.school[1] == "Sōsaku hanga movement, from 1904") {
-                radios[i].setAttribute("checked", "checked");
-            }
-        }
-        main("approxValue").value = item.approxValue[1];
-        main("datePrint").value = item.datePrint[1];
-        main("dateAdded").value = item.dateAdded[1];
-        main("additionalComments").value = item.additionalComments[1];
         save.removeEventListener("click", storeData);
-        // change Submit button value to say edit
-        main("submit").value = "Edit Contact";
+
+     // change Submit button value to say edit
+        main("submit").value = "Edit Print Record";
         var editSubmit = main("submit");
-        // save the key value established in this function as a property
+
+     // save the key value established in this function as a property
         editSubmit.addEventListener("click", validateInput);
         editSubmit.key = this.key;
+
     }
 
 //confirm delete records
@@ -289,6 +302,57 @@ window.addEventListener("DOMContentLoaded", function () {
         }
 
     }
+
+//Search function
+    /*
+    function getSearch(e) {
+        toggleControls("search");
+        var printGroups = main("group").value;
+        var term = main("search").value;
+        if (printGroups != "--Choose One--" && term === "") {
+            for (i = 0, j = localStorage.length; i < j; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                var obj = JSON.parse(value);
+                if (printGroups === obj.group[1]) {
+                    for (n in obj) {
+                        console.log(obj [n][1]);
+                    }
+                }
+            }
+        }
+        if (term != "" & printGroups === "--Choose One--") {
+            for (i = 0, j = localStorage.length; i < j; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                var obj = JSON.parse(value);
+                for (n in obj) {
+                    if (term === obj [n][1]) {
+                        for(q in obj) {
+                            console.log(obj[q][1]);
+                        }
+                    }
+                }
+            }
+        }
+        if (term === obj[n][1] && printGroups === obj.group[1]) {
+            for (i = 0, j = localStorage.length; i < j; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                var obj = JSON.parse(value);
+                if (printGroups === obj.group[1]) {
+                    for (g in obj) {
+                        console.log(obj[g][1]);
+                    }
+                }
+            }
+        }
+     }
+*/
+
+
+
+
 
 // variable for drop down
     var printGroups = ["--Choose One--", "Hokusai", "Yoshitoshi", "Kuniyoshi"],
