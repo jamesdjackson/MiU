@@ -136,6 +136,7 @@ window.addEventListener("DOMContentLoaded", function () {
         imageLi.appendChild(newImg);
     }
 
+
 //generate records
 
     function automagicRecords () {
@@ -168,7 +169,7 @@ window.addEventListener("DOMContentLoaded", function () {
         var value = localStorage.getItem(this.key);
         var item = JSON.parse(value);
 
-        switchControls("off"); // show the for
+        switchControls("off"); // show the form
 
         var radios = document.forms[0].school;
         for (i = 0; i < radios.length; i++){
@@ -194,7 +195,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
         var checkBoxValue = document.forms[0].recordComplete;
         for (i = 0; i  < checkBoxValue.length; i++){
-            if (checkBoxValue[i].value == "Yes" && item.recordComplete[1] == "Yes") {
+            if (checkBoxValue[i].value == "checked" && item.recordComplete[1] == "checked") {
             checkBoxValue[1].setAttribute("checked", "checked");
             }
         }
