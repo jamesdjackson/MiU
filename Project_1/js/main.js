@@ -1,9 +1,7 @@
 /*
-
  <!--James Jackson->
  <!--MIU1304-->
- <!--Project 1-->
-
+ <!--Project 2-->
 */
 
 window.addEventListener("DOMContentLoaded", function () {
@@ -60,7 +58,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-// retireve checkbox value
+// retrieve checkbox value
     function retrieveCheckbox(){
         if(main('recordComplete').checked) {
             recordCompleteValue = 'Yes';
@@ -87,13 +85,12 @@ window.addEventListener("DOMContentLoaded", function () {
         item.datePrint = ["Date Printed:", main("datePrint").value];
         item.dateAdded = ["Date Acquired:", main("dateAdded").value];
         item.additionalComments = ["Comments:", main("additionalComments").value];
-        item.recordComplete = ["Completed Record?", recordCompleteValue];
         localStorage.setItem(id, JSON.stringify(item));
         alert("Japanese print record saved");
     }
 
 //retrieve JSON records
-    function retireveRecords() {
+    function retrieveRecords() {
         switchControls("on");
         if (localStorage.length === 0) {
             alert("I automagically added some records for you!");
@@ -196,7 +193,7 @@ window.addEventListener("DOMContentLoaded", function () {
         var checkBoxValue = document.forms[0].recordComplete;
         for (i = 0; i  < checkBoxValue.length; i++){
             if (checkBoxValue[i].value == "checked" && item.recordComplete[1] == "checked") {
-            checkBoxValue[1].setAttribute("checked", "checked");
+                checkBoxValue[1].setAttribute("checked", "checked");
             }
         }
 
@@ -210,16 +207,6 @@ window.addEventListener("DOMContentLoaded", function () {
         main("additionalComments").value    = item.additionalComments[1];
 
         save.removeEventListener("click", storeData);
-
-     // change Submit button value to say edit
-        main("submit").value = "Edit Print Record";
-        var editSubmit = main("submit");
-
-     // save the key value established in this function as a property
-        editSubmit.addEventListener("click", validateInput);
-        editSubmit.key = this.key;
-
-    }
 
 //confirm delete records
     function deletePrintRecords () {
@@ -252,7 +239,7 @@ window.addEventListener("DOMContentLoaded", function () {
         var getapproxValue = main("approxValue");
         var getdatePrint = main("datePrint");
         var getdateAdded = main("dateAdded");
-        var recordComplete = main("recordComplete");
+        //var recordComplete = main("recordComplete");
         var messageAry = [];
         if (getGroup.value === "--Choose One--") {
             var groupError = "Please select a Japanese print artist.";
@@ -284,12 +271,6 @@ window.addEventListener("DOMContentLoaded", function () {
             messageAry.push(dateAddedError);
         }
 
-        if (recordComplete.value === "") {
-            var recordCompleteError = "Please check if record complete.";
-            recordCompleteAdded.style.border = "1px solid red";
-            messageAry.push(recordCompleteError);
-        }
-
         if (messageAry.length >= 1) {
             for(i = 0; i < messageAry.length; i++) {
                 var txt = document.createElement("li");
@@ -305,7 +286,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
 //Search function
-    /*
+
     function getSearch(e) {
         toggleControls("search");
         var printGroups = main("group").value;
@@ -349,7 +330,6 @@ window.addEventListener("DOMContentLoaded", function () {
             }
         }
      }
-*/
 
 
 
@@ -364,13 +344,13 @@ window.addEventListener("DOMContentLoaded", function () {
 
 // set link and submit click events
     var displayLink = main("displayLink");
-    displayLink.addEventListener("click", retireveRecords);
+    displayLink.addEventListener("click", retrieveRecords);
     var clearLink = main("clear");
     clearLink.addEventListener("click", clearLocalStorage);
 
 //var searchLink = main("searchLink");
-//searchLink.addEventListener("click", getSearch);
+    searchLink.addEventListener("click", getSearch);
     var save = main("submit");
     save.addEventListener("click", validateInput);
+}});
 
-});
